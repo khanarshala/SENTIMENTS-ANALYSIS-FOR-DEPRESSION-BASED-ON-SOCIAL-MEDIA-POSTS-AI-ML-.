@@ -1,0 +1,59 @@
+After deciding to look at the connection between mental health and social media, it became apparent that the most effective way to begin this process would be to focus specifically on one area of mental health and one social media platform. 
+Because depression is such a wide-spread issue, it made the most sense to focus on depression and its associated research.
+While Facebook has been studied repeatedly and a wealth of information exists on using Facebook posts to detect and analyze mental health, 
+Twitter seemed to be a more intriguing platform to use. Tweets are fundamentally different from Facebook posts. They are more anonymous, shorter, faster, and more likely to be made
+quickly throughout the day and night. Additionally, Twitter data is readily available as existing datasets and it’s simple to scrape and even stream, if desired.
+Once deciding that Twitter would be the way to go, finding (or creating) the optimal data was the next issue to tackle. There are existing datasets containing random Tweets and 
+Tweets analyzed for sentiment, but sentiment analysis alone is not the same thing as depression analysis.
+Because there are no publicly available datasets containing “depressive” Tweets, it was clear that I would have to create my own. One of the first ways that came to mind was using
+Tweepy, but Tweepy requires a developer account, meaning that a user would need to apply for a Twitter developer account. I wanted to make sure that this model would be easily
+reproducible to anyone interested in recreating it.
+After further research, TWINT turned out to be the optimal solution. TWINT allows any user the ability to search and scrape Tweets in a variety of ways and collect and store them.
+The question at that point became, what makes a Tweet indicative of depression? A number of research papers exist which look at lexical markers of depression, and they all agree 
+on a number of points. People suffering from depression often subconsciously use very specific linguistic markers that indicate depression.
+It would be possible to build a dictionary including these terms and give them separate weights, but after reading a number of papers related to depression, mental health, and
+linguistics, it became clear that depression is something that is most frequently self-reported and, at least initially, self-assessed. Therefore, if a person says that she is
+depressed, it is extremely likely that she is depressed.
+Once deciding that Twitter would be the way to go, finding (or creating) the optimal data was the next issue to tackle. There are existing datasets containing random Tweets and 
+Tweets analyzed for sentiment, but sentiment analysis alone is not the same thing as depression analysis.
+Because there are no publicly available datasets containing “depressive” Tweets, it was clear that I would have to create my own. One of the first ways that came to mind was using
+Tweepy, but Tweepy requires a developer account, meaning that a user would need to apply for a Twitter developer account. I wanted to make sure that this model would be easily
+reproducible to anyone interested in recreating it.
+After further research, TWINT turned out to be the optimal solution. TWINT allows any user the ability to search and scrape Tweets in a variety of ways and collect and store them.
+The question at that point became, what makes a Tweet indicative of depression? A number of research papers exist which look at lexical markers of depression, and they all agree
+on a number of points. People suffering from depression often subconsciously use very specific linguistic markers that indicate depression. It would be possible to build a 
+dictionary including these terms and give them separate weights, but after reading a number of papers related to depression, mental health, and linguistics, it became clear that 
+depression is something that is most frequently self-reported and, at least initially, self-assessed. Therefore, if a person says that she is depressed, it is extremely likely 
+that she is depressed.
+After scraping Tweets using TWINT for a random 24 hour period, the data were combined into a single dataset. The Tweets were manually cleaned (for example, to remove references 
+to economic and environmental rather than emotional depression), then cleaned and processed.
+The next issue involved the choice of classifier. There are a number of ways to analyze the information, but the reality is that mental health, specifically depression, is a
+subjective and complex topic. While it may be possible to quantify the degree to which one might be depressed based on a Tweet, the only real question that matters for this 
+project is, is an individual exhibiting linguistic markers indicative of depression? Knowing the question and the subjective nature of mental illness, a binary classification
+model made the most sense for this project.
+While a logistic regression model made sense as a benchmark model, a Long Short Term Memory network (LSTM) model wound up being the most robust for the project at hand.
+A recurrent neural network allows information to be passed from one step of a network to another, and are ideal for sequences, lists, and other language processing problems.
+A LSTM is capable of learning long-term dependancies and work incredibly well on a large variety of problems. While RNNs have difficulty with long-term dependencies, LSTMs are
+explicitly designed to avoid the long-term dependency problem.
+It also made sense to add a convolutional layer. Convolutional neural networks (CNNs) are well suited for learning spatial structure from data and learns structure from the
+sequential data which it passes into the LSTM layer.
+Utilizing Word2vec also made the model much more robust. Word2vec is a two-layer neural net that processes text. Its input is a corpus of text and its output is a set of 
+vectors. It turns text into a numerical form that deep nets can understand. Word2vec groups the vectors of similar words together in vectorspace. It’s able to detect
+similarities mathematically. Given enough data, usage, and contexts, it can make highly accurate guesses about a word’s meaning based on past appearances. These guesses can be
+used to establish a word’s association with other words.The output of the Word2vec neural net is a vocabulary in which each item has a vector attached to it, which can be fed 
+into a deep-learning net.
+The LSTM + CNN model takes in an input and then outputs a single number representing the probability that the tweet indicates depression. The model takes in each input sentence,
+replaces it with its embeddings, and then runs the new embedding vector through a convolutional layer. The convolutional layer passes the structure that it learns from the
+sequential data into a LSTM layer. The output of the LSTM layer is then fed into a Dense model for prediction.
+Once the model was designed and built, the issue then became refining the model to achieve the best results. Initially, the model suffered from overfitting, as evidenced 
+in the graph. However, by decreasing the complexity of the model and increasing the dropout, a much more robust model was achieved and evidence of overfitting was eliminated.
+The final architecture, parameters, and hyperparameters were chosen because they performed the best among all the tried combinations. The LSTM model takes in the tokenized 
+tweets and feeds them into an embedding layer to get an embedding vector. The model takes in an input and then outputs a number representing the probability that the Tweet
+indicates depression. The model takes in each input Tweet, replaces it with its embeddings, and then runs the new embedding vector through a convolutional layer, which is
+well-suited for learning spatial structure from data. The convolutional layer takes advantage of this and learns structure from the sequential data, which it then passes
+into a standard LSTM layer. The output of the LSTM layer is fed into a dense model for prediction. The model has an embedding layer, a convolutional layer, and a Dense layer 
+and uses max pooling, a dropout of 0.5, binary cross entropy loss, an Nadam optimizer, and a ReLu activation function in the first layer and a sigmoid activation function in 
+the dense layer. Accuracy and loss are recorded and visualized and compared to a benchmark logistic regression model.
+
+The data for this model were split into 60% training, 20% validation, and 20% testing sets. The testing set was kept separate until the end, ensuring the accuracy of the 
+model. The final results were analyzed by looking at both accuracy and a classification report.
