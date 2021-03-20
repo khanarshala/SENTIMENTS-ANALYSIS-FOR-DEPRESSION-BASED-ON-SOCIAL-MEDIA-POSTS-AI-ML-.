@@ -1,0 +1,30 @@
+Table 1 Characteristics of raw data
+
+Characteristic Quantity
+Total number of cells 150,045
+Total number of depressive indicative cells based on our manual response (with zero values) 87,129
+Total number of non-depressive indicative cells based on our manual response 62,916
+Total number of depressive indicative cells based on our manual response for linguistic style (without zero value) 43,551
+Articles 3200
+Prepositions 3842
+Auxiliary verbs 3813
+Conjunctions 3619
+Personal pronoun 3875
+Impersonal pronoun 3444
+Verbs 4004
+Negations 2637
+Pronoun 3989
+Adverb 3407
+Adjective 3342
+Comparative 2436
+Interrogative 1943
+Total number of depressive indicative cells based on our manual response for emotional process (without zero value) 13,884
+Positive 2676
+Negative 4149
+Sad 1733
+Anger 1177
+Anxiety 4149
+Total number of depressive indicative cells based on our manual response for temporal process (without zero value) 8237
+Past 2527
+Present 3909
+Future 1801
