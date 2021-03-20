@@ -1,0 +1,14 @@
+Abstract
+Purpose: Social networks have been developed as a great point for its users to communicate with their interested
+friends and share their opinions, photos, and videos refecting their moods, feelings and sentiments. This creates an
+opportunity to analyze social network data for user’s feelings and sentiments to investigate their moods and attitudes
+when they are communicating via these online tools.
+Methods: Although diagnosis of depression using social networks data has picked an established position globally, there are several dimensions that are yet to be detected. In this study, we aim to perform depression analysis on
+Facebook data collected from an online public source. To investigate the efect of depression detection, we propose
+machine learning technique as an efcient and scalable method.
+Results: We report an implementation of the proposed method. We have evaluated the efciency of our proposed
+method using a set of various psycholinguistic features. We show that our proposed method can signifcantly improve
+the accuracy and classifcation error rate. In addition, the result shows that in diferent experiments Decision Tree (DT)
+gives the highest accuracy than other ML approaches to fnd the depression.
+Conclusions: Machine learning techniques identify high quality solutions of mental health problems among Facebook users.
+Keywords: Social network, Emotions, Depression, Sentiment analysis
